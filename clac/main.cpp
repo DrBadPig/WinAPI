@@ -9,6 +9,8 @@ HINSTANCE hInst;
 //кнопки
 HWND hbutton, hedit, hres_edit, buttons2[16];
 
+double first = 0, second = 0, result = 0;
+
 #define ID_EQUAL_BUTTON			3020
 #define ID_PLUS_BUTTON			3021
 #define ID_MINUS_BUTTON			3022
@@ -87,6 +89,81 @@ LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     // обработка сообщений дочерних элементов
     case WM_COMMAND:
     {
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_ONE) && (mes == BN_CLICKED)) {
+
+        }
+
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_TWO) && (mes == BN_CLICKED)) {
+
+        }
+
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_THREE) && (mes == BN_CLICKED)) {
+
+        }
+
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_FOUR) && (mes == BN_CLICKED)) {
+
+        }
+
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_FIVE) && (mes == BN_CLICKED)) {
+
+        }
+
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_SIX) && (mes == BN_CLICKED)) {
+
+        }
+
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_SEVEN) && (mes == BN_CLICKED)) {
+
+        }
+
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_EIGHT) && (mes == BN_CLICKED)) {
+
+        }
+
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_NINE) && (mes == BN_CLICKED)) {
+
+        }
+
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_ZERO) && (mes == BN_CLICKED)) {
+
+        }
+
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_PLUS_BUTTON) && (mes == BN_CLICKED)) {
+
+        }
+
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_MINUS_BUTTON) && (mes == BN_CLICKED)) {
+
+        }
+
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_DIVIDE_BUTTON) && (mes == BN_CLICKED)) {
+
+        }
+
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_MULTIPLY_BUTTON) && (mes == BN_CLICKED)) {
+
+        }
+
+        int mes = HIWORD(wParam);
+        if ((LOWORD(wParam) == ID_EQUAL_BUTTON) && (mes == BN_CLICKED)) {
+
+        }
+
         return 0;
     }
 
