@@ -13,15 +13,17 @@ char className[] = "Calculator";
 MSG msg;
 HINSTANCE hInst;
 //кнопки
-HWND hbutton, hedit;
+HWND hbutton, hedit, hrestart;
 
 double first = 0, second = 0, result = 0;
+char operation;
 
 #define ID_EQUAL_BUTTON			3020
 #define ID_PLUS_BUTTON			3021
 #define ID_MINUS_BUTTON			3022
 #define ID_DIVIDE_BUTTON		3023
 #define ID_MULTIPLY_BUTTON	    3024
+#define ID_RESTART_BUTTON	    3221
 #define ID_ONE	    	    	3001
 #define ID_TWO              	3002
 #define ID_THREE        	    3003
@@ -33,6 +35,8 @@ double first = 0, second = 0, result = 0;
 #define ID_NINE	                3009
 #define ID_ZERO	                3000
 #define ID_TEXTBOX	            3300
+
+double StringToDouble(char* string);
 
 // оконная функция
 LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -97,7 +101,7 @@ LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     {
         int mes = HIWORD(wParam);
 
-        char* text;
+        char* text = new char[1024];
 
         if ((LOWORD(wParam) == ID_ONE) && (mes == BN_CLICKED)) {
 
@@ -187,6 +191,7 @@ LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             strcat(text, "+");
 
             SetWindowText(hedit, text);
+            operation += '+';
 
             first = StringToDouble(text);
         }
@@ -197,6 +202,9 @@ LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             strcat(text, "-");
 
             SetWindowText(hedit, text);
+            operation += '-';
+
+            first = StringToDouble(text);
         }
 
         if ((LOWORD(wParam) == ID_DIVIDE_BUTTON) && (mes == BN_CLICKED)) {
@@ -205,6 +213,9 @@ LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             strcat(text, "/");
 
             SetWindowText(hedit, text);
+            operation += '/';
+
+            first = StringToDouble(text);
         }
 
         if ((LOWORD(wParam) == ID_MULTIPLY_BUTTON) && (mes == BN_CLICKED)) {
@@ -213,14 +224,64 @@ LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             strcat(text, "*");
 
             SetWindowText(hedit, text);
+            operation += '*';
+
+            first = StringToDouble(text);
         }
 
         if ((LOWORD(wParam) == ID_EQUAL_BUTTON) && (mes == BN_CLICKED)) {
             GetWindowText(hedit, text, 1024);
 
-            strcat(text, "=");
+            char* text2 = new char[1024];
+            bool f = false;
 
+            for (char i = 0, k = 0; i < '\0'; i++)
+            {
+                if (text[i] == '+' || text[i] == '-' || text[i] == '/' || text[i] == '*')
+                {
+                    f = true;
+                }
+                if (f)
+                {
+                    text2[k++] += text[i];
+                }
+            }
+
+            strcat(text, "=");
             SetWindowText(hedit, text);
+
+            second = StringToDouble(text2);
+
+            switch (operation)
+            {
+            case '+':
+                result = first + second;
+                break;
+            case '-':
+                result = first - second;
+                break;
+            case '*':
+                result = first * second;
+                break;
+            case '/':
+                result = first / second;
+                break;
+            }
+
+            char* string_result = new char[1024];
+            _itoa(result, string_result, 10);
+
+            strcat(text, string_result);
+            SetWindowText(hedit, text);
+
+            hrestart = CreateWindow("button", "RESTART", WS_CHILD | WS_VISIBLE,
+                210, 170, 50, 50, wnd, (HMENU)ID_RESTART_BUTTON, hInst, 0);
+        }
+
+        if ((LOWORD(wParam) == ID_RESTART_BUTTON) && (mes == BN_CLICKED)) 
+        {
+            SetWindowText(hedit, " ");
+            DestroyWindow(hrestart);
         }
 
         return 0;
