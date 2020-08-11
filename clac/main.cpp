@@ -1,4 +1,10 @@
 #include <windows.h>
+#include <string>
+#include <iostream>
+
+#define _CRT_SECURE_NO_WARNINGS
+
+using namespace std;
 
 // название класса окна
 char className[] = "Calculator";
@@ -7,7 +13,7 @@ char className[] = "Calculator";
 MSG msg;
 HINSTANCE hInst;
 //кнопки
-HWND hbutton, hedit, hres_edit, buttons2[16];
+HWND hbutton, hedit;
 
 double first = 0, second = 0, result = 0;
 
@@ -26,7 +32,7 @@ double first = 0, second = 0, result = 0;
 #define ID_EIGHT	            3008
 #define ID_NINE	                3009
 #define ID_ZERO	                3000
-#define ID_TEXTBOX	            3000
+#define ID_TEXTBOX	            3300
 
 // оконная функция
 LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -69,16 +75,16 @@ LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             210, 170, 50, 50, wnd, (HMENU)ID_EQUAL_BUTTON, hInst, 0);
 
         hbutton = CreateWindow("button", "+", WS_CHILD | WS_VISIBLE,
-            160, 70, 50, 50, wnd, (HMENU)ID_ZERO, hInst, 0);
+            160, 70, 50, 50, wnd, (HMENU)ID_PLUS_BUTTON, hInst, 0);
 
         hbutton = CreateWindow("button", "-", WS_CHILD | WS_VISIBLE,
-            160, 120, 50, 50, wnd, (HMENU)ID_ZERO, hInst, 0);
+            160, 120, 50, 50, wnd, (HMENU)ID_MINUS_BUTTON, hInst, 0);
 
         hbutton = CreateWindow("button", "*", WS_CHILD | WS_VISIBLE,
-            210, 70, 50, 50, wnd, (HMENU)ID_ZERO, hInst, 0);
+            210, 70, 50, 50, wnd, (HMENU)ID_MULTIPLY_BUTTON, hInst, 0);
 
         hbutton = CreateWindow("button", "/", WS_CHILD | WS_VISIBLE,
-            210, 120, 50, 50, wnd, (HMENU)ID_ZERO, hInst, 0);
+            210, 120, 50, 50, wnd, (HMENU)ID_DIVIDE_BUTTON, hInst, 0);
 
         hedit = CreateWindow("edit", "", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_READONLY,
             10, 10, 250, 50, wnd, (HMENU)ID_TEXTBOX, hInst, 0);
@@ -90,78 +96,131 @@ LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     case WM_COMMAND:
     {
         int mes = HIWORD(wParam);
+
+        char* text;
+
         if ((LOWORD(wParam) == ID_ONE) && (mes == BN_CLICKED)) {
 
+            GetWindowText(hedit, text, 1024);
+
+            strcat(text, "1");
+
+            SetWindowText(hedit, text);
         }
 
-        int mes = HIWORD(wParam);
         if ((LOWORD(wParam) == ID_TWO) && (mes == BN_CLICKED)) {
 
+            GetWindowText(hedit, text, 1024);
+
+            strcat(text, "2");
+
+            SetWindowText(hedit, text);
         }
 
-        int mes = HIWORD(wParam);
         if ((LOWORD(wParam) == ID_THREE) && (mes == BN_CLICKED)) {
+            GetWindowText(hedit, text, 1024);
 
+            strcat(text, "3");
+
+            SetWindowText(hedit, text);
         }
 
-        int mes = HIWORD(wParam);
         if ((LOWORD(wParam) == ID_FOUR) && (mes == BN_CLICKED)) {
+            GetWindowText(hedit, text, 1024);
 
+            strcat(text, "4");
+
+            SetWindowText(hedit, text);
         }
 
-        int mes = HIWORD(wParam);
         if ((LOWORD(wParam) == ID_FIVE) && (mes == BN_CLICKED)) {
+            GetWindowText(hedit, text, 1024);
 
+            strcat(text, "5");
+
+            SetWindowText(hedit, text);
         }
 
-        int mes = HIWORD(wParam);
         if ((LOWORD(wParam) == ID_SIX) && (mes == BN_CLICKED)) {
+            GetWindowText(hedit, text, 1024);
 
+            strcat(text, "6");
+
+            SetWindowText(hedit, text);
         }
 
-        int mes = HIWORD(wParam);
         if ((LOWORD(wParam) == ID_SEVEN) && (mes == BN_CLICKED)) {
+            GetWindowText(hedit, text, 1024);
 
+            strcat(text, "7");
+
+            SetWindowText(hedit, text);
         }
 
-        int mes = HIWORD(wParam);
         if ((LOWORD(wParam) == ID_EIGHT) && (mes == BN_CLICKED)) {
+            GetWindowText(hedit, text, 1024);
 
+            strcat(text, "8");
+
+            SetWindowText(hedit, text);
         }
 
-        int mes = HIWORD(wParam);
         if ((LOWORD(wParam) == ID_NINE) && (mes == BN_CLICKED)) {
+            GetWindowText(hedit, text, 1024);
 
+            strcat(text, "9");
+
+            SetWindowText(hedit, text);
         }
 
-        int mes = HIWORD(wParam);
         if ((LOWORD(wParam) == ID_ZERO) && (mes == BN_CLICKED)) {
+            GetWindowText(hedit, text, 1024);
 
+            strcat(text, "0");
+
+            SetWindowText(hedit, text);
         }
 
-        int mes = HIWORD(wParam);
         if ((LOWORD(wParam) == ID_PLUS_BUTTON) && (mes == BN_CLICKED)) {
+            GetWindowText(hedit, text, 1024);
 
+            strcat(text, "+");
+
+            SetWindowText(hedit, text);
+
+            first = StringToDouble(text);
         }
 
-        int mes = HIWORD(wParam);
         if ((LOWORD(wParam) == ID_MINUS_BUTTON) && (mes == BN_CLICKED)) {
+            GetWindowText(hedit, text, 1024);
 
+            strcat(text, "-");
+
+            SetWindowText(hedit, text);
         }
 
-        int mes = HIWORD(wParam);
         if ((LOWORD(wParam) == ID_DIVIDE_BUTTON) && (mes == BN_CLICKED)) {
+            GetWindowText(hedit, text, 1024);
 
+            strcat(text, "/");
+
+            SetWindowText(hedit, text);
         }
 
-        int mes = HIWORD(wParam);
         if ((LOWORD(wParam) == ID_MULTIPLY_BUTTON) && (mes == BN_CLICKED)) {
+            GetWindowText(hedit, text, 1024);
 
+            strcat(text, "*");
+
+            SetWindowText(hedit, text);
         }
 
-        int mes = HIWORD(wParam);
         if ((LOWORD(wParam) == ID_EQUAL_BUTTON) && (mes == BN_CLICKED)) {
+            GetWindowText(hedit, text, 1024);
 
+            strcat(text, "=");
+
+            SetWindowText(hedit, text);
         }
 
         return 0;
@@ -232,4 +291,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR     lpC
     }
 
     return 1;
+}
+
+double StringToDouble(char* string)
+{
+    double number;
+
+    number = (double)atoi(string);
+
+    return number;
 }
